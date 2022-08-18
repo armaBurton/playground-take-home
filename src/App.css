@@ -7,10 +7,34 @@
   border-radius: 50px;
   font-size: 1.3rem;
   margin-top: 75px;
+  font-weight: 900;
 }
 
 .upload:hover {
-  background-color: var(--gradient);
+  background: linear-gradient(to bottom, #323232 0%, #3f3f3f 40%, #1c1c1c 150%),
+    linear-gradient(
+      to top,
+      rgba(255, 255, 255, 0.4) 0%,
+      rgba(0, 0, 0, 0.25) 200%
+    );
+  background-blend-mode: multiply;
+  color: magenta;
+}
+
+.upload:active {
+  background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(0, 0, 0, 0.15) 100%
+    ),
+    radial-gradient(
+        at top center,
+        rgba(255, 255, 255, 0.4) 0%,
+        rgba(0, 0, 0, 0.4) 120%
+      )
+      #989898;
+  background-blend-mode: multiply, multiply;
+  color: black;
 }
 
 .readTextSection {
@@ -31,13 +55,13 @@ section {
   color: grey;
   list-style: none;
   display: gird;
-  padding: 10px;
+  padding: 8px 0 8px 8px;
   font-size: 1.25rem;
+  font-weight: 100;
 }
 
 .wordCountHolder {
   grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
   width: 950px;
   display: grid;
   flex-direction: row;
@@ -46,4 +70,6 @@ section {
 
 span {
   color: white;
+  font-weight: 900;
+  letter-spacing: 0.063rem;
 }

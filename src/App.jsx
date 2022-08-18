@@ -4,7 +4,7 @@ import styles from './App.css';
 export default function App() {
   const fileRef = useRef();
 
-  const [text, setText] = useState('');
+  const [text, setText] = useState('Click the Button to Upload a TXT file');
   const [val, setVal] = useState([]);
 
   const removePunct = () => {
@@ -26,7 +26,6 @@ export default function App() {
         obj = { ...obj, [`${s}`]: 1 };
       }
     });
-
     return obj;
   };
 
@@ -42,22 +41,13 @@ export default function App() {
 
   const stringToArray = () => {
     const str = removePunct();
-    console.log(str);
     const obj = createObject(str);
     makeArray(obj);
-  };
-
-  const renderVal = () => {
-    val.map((v) => console.log(v));
   };
 
   useEffect(() => {
     stringToArray();
   }, [text]);
-
-  useEffect(() => {
-    renderVal();
-  }, [val]);
 
   const handleChange = (e) => {
     const [file] = e.target.files;
@@ -75,7 +65,7 @@ export default function App() {
           className={styles.upload}
           onClick={() => fileRef.current.click()}
         >
-          Click to Upload TXT File
+          Click Me Upload TXT File
         </button>
         <input
           ref={fileRef}
@@ -93,12 +83,11 @@ export default function App() {
             return (
               <div key={vars + i} className={styles.wordCountList}>
                 <p>
-                  Word: <span>{`${vars[0]}`}</span>
+                  Word:&nbsp; <span>{`${vars[0]}`}</span>
                 </p>
                 <p>
-                  Count: <span>{`${vars[1]}`}</span>
+                  Count:&nbsp; <span>{`${vars[1]}`}</span>
                 </p>
-                <br />
               </div>
             );
           })}
