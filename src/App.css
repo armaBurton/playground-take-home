@@ -1,0 +1,22 @@
+.upload {
+  cursor: pointer;
+  background-color: black;
+  color: white;
+  padding: 20px 40px;
+  border: 1px solid magenta;
+  border-radius: 50px;
+  font-size: 1.3rem;
+}
+
+.upload:hover {
+  background-color: var(--gradient);
+}
+
+.readTextSection {
+  color: white;
+}
+
+section {
+  height: 100vh;
+  width: 500px;
+}
