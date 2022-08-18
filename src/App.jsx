@@ -65,7 +65,7 @@ export default function App() {
           className={styles.upload}
           onClick={() => fileRef.current.click()}
         >
-          Click Me Upload TXT File
+          Click Me to Upload TXT File
         </button>
         <input
           ref={fileRef}
