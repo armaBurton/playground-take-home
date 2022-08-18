@@ -7,7 +7,7 @@ export default function App() {
   const [text, setText] = useState('');
   const [val, setVal] = useState([]);
 
-  const removePunct = (str) => {
+  const removePunct = () => {
     return text
       .replace(/[\".,\/#!$%\^&\*;:{}=\-_`~()\r\n|\n|\r]/g, '')
       .split(' ');
@@ -26,15 +26,20 @@ export default function App() {
     return obj;
   };
 
-  const stringToArray = () => {
-    const str = removePunct();
-    const obj = createObject(str);
+  const makeArray = (obj) => {
     const arr = [];
     for (let o in obj) {
       arr.push([o, obj[o]]);
     }
-    console.log(obj);
-    setVal(arr);
+    if (arr.length > 1) {
+      setVal(arr);
+    }
+  };
+
+  const stringToArray = () => {
+    const str = removePunct();
+    const obj = createObject(str);
+    makeArray(obj);
   };
 
   const renderVal = () => {
@@ -46,7 +51,6 @@ export default function App() {
   }, [text]);
 
   useEffect(() => {
-    console.log(val.length);
     renderVal();
   }, [val]);
 
@@ -66,7 +70,7 @@ export default function App() {
           className={styles.upload}
           onClick={() => fileRef.current.click()}
         >
-          Custom File Input Button
+          Click to Upload TXT File
         </button>
         <input
           ref={fileRef}
@@ -78,6 +82,17 @@ export default function App() {
         />
       </div>
       <div className={styles.readTextSection}>{`${text}`}</div>
+      <div className={styles.wordCountSection}>
+        <ul className={styles.list}>
+          {val?.map((vars, i) => {
+            return (
+              <li key={vars + i} className={styles.wordCountList}>
+                {`${vars[0]} ${vars[1]}`}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </section>
   );
 }
