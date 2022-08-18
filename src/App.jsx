@@ -9,8 +9,12 @@ export default function App() {
 
   const removePunct = () => {
     return text
-      .replace(/[\".,\/#!$%\^&\*;:{}=\-_`~()\r\n|\n|\r]/g, '')
-      .split(' ');
+      .toLowerCase()
+      .replace(/[\".,\/#!$%\^&\*;:{}=\-_`~()\r\n|\n|\r]/g, ' ')
+      .split(' ')
+      .filter((space) => {
+        return /\S/.test(space);
+      });
   };
 
   const createObject = (str) => {
@@ -38,6 +42,7 @@ export default function App() {
 
   const stringToArray = () => {
     const str = removePunct();
+    console.log(str);
     const obj = createObject(str);
     makeArray(obj);
   };
@@ -83,15 +88,21 @@ export default function App() {
       </div>
       <div className={styles.readTextSection}>{`${text}`}</div>
       <div className={styles.wordCountSection}>
-        <ul className={styles.list}>
+        <div className={styles.wordCountHolder}>
           {val?.map((vars, i) => {
             return (
-              <li key={vars + i} className={styles.wordCountList}>
-                {`${vars[0]} ${vars[1]}`}
-              </li>
+              <div key={vars + i} className={styles.wordCountList}>
+                <p>
+                  Word: <span>{`${vars[0]}`}</span>
+                </p>
+                <p>
+                  Count: <span>{`${vars[1]}`}</span>
+                </p>
+                <br />
+              </div>
             );
           })}
-        </ul>
+        </div>
       </div>
     </section>
   );
