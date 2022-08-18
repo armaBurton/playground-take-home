@@ -4,13 +4,17 @@ import styles from './App.css';
 export default function App() {
   const fileRef = useRef();
 
-  const [text, setText] = useState('');
+  const [text, setText] = useState('Click the Button to Upload a TXT file');
   const [val, setVal] = useState([]);
 
   const removePunct = () => {
     return text
-      .replace(/[\".,\/#!$%\^&\*;:{}=\-_`~()\r\n|\n|\r]/g, '')
-      .split(' ');
+      .toLowerCase()
+      .replace(/[\".,\/#!$%\^&\*;:{}=\-_`~()\r\n|\n|\r]/g, ' ')
+      .split(' ')
+      .filter((space) => {
+        return /\S/.test(space);
+      });
   };
 
   const createObject = (str) => {
@@ -22,7 +26,6 @@ export default function App() {
         obj = { ...obj, [`${s}`]: 1 };
       }
     });
-
     return obj;
   };
 
@@ -42,17 +45,9 @@ export default function App() {
     makeArray(obj);
   };
 
-  const renderVal = () => {
-    val.map((v) => console.log(v));
-  };
-
   useEffect(() => {
     stringToArray();
   }, [text]);
-
-  useEffect(() => {
-    renderVal();
-  }, [val]);
 
   const handleChange = (e) => {
     const [file] = e.target.files;
@@ -70,7 +65,7 @@ export default function App() {
           className={styles.upload}
           onClick={() => fileRef.current.click()}
         >
-          Click to Upload TXT File
+          Click Me to Upload TXT File
         </button>
         <input
           ref={fileRef}
@@ -83,15 +78,20 @@ export default function App() {
       </div>
       <div className={styles.readTextSection}>{`${text}`}</div>
       <div className={styles.wordCountSection}>
-        <ul className={styles.list}>
+        <div className={styles.wordCountHolder}>
           {val?.map((vars, i) => {
             return (
-              <li key={vars + i} className={styles.wordCountList}>
-                {`${vars[0]} ${vars[1]}`}
-              </li>
+              <div key={vars + i} className={styles.wordCountList}>
+                <p>
+                  Word:&nbsp; <span>{`${vars[0]}`}</span>
+                </p>
+                <p>
+                  Count:&nbsp; <span>{`${vars[1]}`}</span>
+                </p>
+              </div>
             );
           })}
-        </ul>
+        </div>
       </div>
     </section>
   );
